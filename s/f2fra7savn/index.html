@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="refresh" content="10">
+<meta name="theme-color" content="#060606">
+<meta name="format-detection" content="telephone=no">
+<title>Your photos — Test - sep 27</title>
+<style>:root { color-scheme: light;
+        --cream:#fef9e6; --ink:#000000; --carbon:#060606; --drift:#c7c3b4; --stone:#8d8b80;
+        --amber:#fdc331; --ember:#fe5722; --red:#f0353c; --merlot:#b4213d; --plum:#671c3b;
+        --g:clamp(16px,4.2vw,40px);
+        --gl:max(var(--g),env(safe-area-inset-left)); --gr:max(var(--g),env(safe-area-inset-right));
+        --sans:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+        --display:"Arial Black",-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Roboto,Arial,sans-serif;
+        --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+        --jp:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",ui-monospace,monospace; }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body { margin:0; min-height:100vh; background:var(--cream); color:var(--ink);
+       font:400 16px/1.2 var(--sans); -webkit-tap-highlight-color:transparent;
+       overflow-x:hidden; }
+img { max-width:100%; }
+a { color:inherit; }
+:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+.pad { padding-left:var(--gl); padding-right:var(--gr); }
+
+/* Nav strip */
+.bar { display:flex; align-items:center; justify-content:space-between; gap:12px;
+       min-height:52px; background:var(--carbon); color:var(--cream);
+       padding-top:env(safe-area-inset-top); }
+.mark { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+        font:700 15px/1 var(--sans); letter-spacing:.02em; text-transform:uppercase; }
+.bar .jp { flex:none; font:400 12px/1 var(--jp); letter-spacing:.12em; opacity:.8; }
+
+/* Hero wordmark */
+.hero { display:grid; gap:18px; padding-top:clamp(28px,7vw,80px); padding-bottom:clamp(28px,6vw,64px); }
+.eyebrow { margin:0 0 8px; font:400 13px/1 var(--jp); letter-spacing:.14em; color:var(--stone); }
+h1 { margin:0; font:900 clamp(54px,17.5vw,150px)/.78 var(--display); letter-spacing:-.035em;
+     text-transform:uppercase; overflow-wrap:anywhere; hyphens:auto; }
+h1.long { font-size:clamp(40px,11vw,112px); line-height:.85; }
+.tag { margin:0; font:400 16px/1.25 var(--sans); max-width:34ch; }
+.tag b { display:block; font-weight:700; font-size:18px; margin-bottom:4px; }
+@media (min-width:760px) {
+  .hero { grid-template-columns:1fr auto; align-items:end; }
+  .tag { text-align:right; font-size:18px; }
+}
+@media (orientation:landscape) and (max-height:500px) {
+  h1 { font-size:clamp(44px,19vh,96px); }
+  h1.long { font-size:clamp(34px,13vh,80px); }
+  .hero { padding-top:24px; padding-bottom:24px; }
+}
+
+/* Dark specimen card — the print, and the GIF beside it */
+.media { display:grid; gap:16px; padding-bottom:clamp(24px,5vw,40px); }
+@media (min-width:760px) { .media.pair { grid-template-columns:1fr 1fr; align-items:start; } }
+.media:not(.pair) .card { max-width:680px; }
+.card { margin:0; background:var(--carbon); color:var(--cream); border-radius:14px;
+        padding:clamp(12px,3.4vw,27px); }
+.card .top { display:flex; justify-content:space-between; align-items:center; gap:10px;
+             margin-bottom:clamp(12px,3vw,20px); }
+.label { font:400 13px/1 var(--mono); letter-spacing:.02em; }
+.card img { display:block; width:100%; height:auto; max-height:78vh; object-fit:contain;
+            background:#1a1a1a; }
+
+/* Pills — ghost, outlined in whatever colour the text is */
+.pill { flex:none; display:inline-flex; align-items:center; justify-content:center; gap:6px;
+        min-height:44px; padding:0 clamp(16px,4vw,27px); border:1px solid currentColor;
+        border-radius:28px; background:transparent; color:inherit; text-decoration:none;
+        font:400 14px/1 var(--sans); letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
+.pill.sm { min-height:36px; padding:0 14px; font-size:12px; }
+
+/* Sunset bands — full bleed, name left, pill right, colour in fixed order */
+.bands { display:flex; flex-direction:column; }
+.band { display:flex; align-items:center; justify-content:space-between; gap:14px; width:100%;
+        min-height:84px; margin:0; border:0; border-radius:0; cursor:pointer; text-align:left;
+        text-decoration:none; color:var(--ink); background:var(--amber);
+        padding-top:clamp(18px,4.5vw,40px); padding-bottom:clamp(18px,4.5vw,40px);
+        font:700 clamp(20px,5.6vw,32px)/1.05 var(--sans); letter-spacing:-.01em; }
+.band .name { min-width:0; }
+.band:nth-child(5n+2) { background:var(--ember); }
+.band:nth-child(5n+3) { background:var(--red);    color:var(--cream); }
+.band:nth-child(5n+4) { background:var(--merlot); color:var(--cream); }
+.band:nth-child(5n+5) { background:var(--plum);   color:var(--cream); }
+.band[disabled] { cursor:progress; }
+.band[disabled] .pill { opacity:.55; }
+@media (hover:hover) {
+  .band:hover .pill { background:var(--ink); border-color:var(--ink); color:var(--cream); }
+  .band:nth-child(5n+3):hover .pill, .band:nth-child(5n+4):hover .pill, .band:nth-child(5n+5):hover .pill
+    { background:var(--cream); border-color:var(--cream); color:var(--ink); }
+}
+.band:active { filter:brightness(.94); }
+
+/* Section header */
+.sec { padding-top:clamp(32px,7vw,80px); }
+.sec h2 { margin:0 0 clamp(16px,3vw,24px); font:700 clamp(26px,7vw,40px)/1 var(--sans);
+          letter-spacing:-.02em; text-transform:uppercase; }
+
+/* Specimen grid — one continuous sheet of hairlines, no gaps */
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:1px;
+        background:var(--drift); border:1px solid var(--drift); border-radius:14px; overflow:hidden; }
+@media (min-width:900px) { .grid { grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); } }
+.grid figure { margin:0; background:var(--cream); display:flex; flex-direction:column; min-width:0; }
+.grid figure > a { display:block; }
+/* Fixed shapes keep the sheet an even grid while images arrive, and a
+   broken or missing one leaves a quiet tile instead of alt text. */
+.grid img, .grid .ph { display:block; width:100%; height:auto; aspect-ratio:3/2; object-fit:cover;
+                       background:#efe9d3; color:transparent; font-size:0; }
+.grid.covers img, .grid.covers .ph { aspect-ratio:2/3; }
+.grid figcaption { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center;
+                   gap:6px 8px; padding:10px; margin-top:auto; }
+.grid .label { color:var(--stone); white-space:nowrap; }
+@media (max-width:374px) { .grid .pill.sm { padding:0 11px; } .grid .label { font-size:12px; } }
+
+.note { margin:clamp(24px,5vw,40px) 0 0; padding:18px 20px; border:1px solid var(--ink);
+        border-radius:14px; font-size:15px; line-height:1.3; max-width:680px; }
+.empty { padding:48px 0; font:400 14px/1.3 var(--mono); color:var(--stone); }
+
+footer { margin-top:clamp(40px,8vw,80px); background:var(--carbon); color:var(--cream);
+         padding-top:28px; padding-bottom:calc(28px + env(safe-area-inset-bottom)); font-size:14px; line-height:1.35; }
+footer p { margin:4px 0; }
+footer a { font-weight:700; overflow-wrap:anywhere; }
+footer .jp { display:block; margin-bottom:12px; font:400 12px/1 var(--jp); letter-spacing:.14em; color:var(--stone); }</style>
+</head>
+<body>
+<nav class="bar pad"><span class="mark">PHOTOBOOTH</span><span class="jp" lang="ja">フォトブース</span></nav><header class="hero pad">
+  <div><p class="eyebrow" lang="ja">もうすぐ</p><h1 class="long">Nearly<br>there</h1></div>
+  <p class="tag"><b>Test - sep 27</b>27 September 2026 · 12:57 AM</p>
+</header>
+<nav class="bands">
+  <span class="band pad"><span class="name">Your photographs are uploading</span>
+  <span class="pill">Wait ↻</span></span>
+</nav>
+<div class="pad"><p class="note">This page refreshes itself every few seconds. Keep it open — your
+photographs appear here as soon as the booth has sent them, usually within a minute of your last shot.</p></div><footer class="pad"><span class="jp" lang="ja">ありがとう</span><p>FOLLOW US FOR YOUR PHOTOS — <a href="https://instagram.com/mixel_ph">https://instagram.com/mixel_ph</a></p><p>Photographs stay up as long as this page does. Save the ones you want.</p></footer></body></html>
