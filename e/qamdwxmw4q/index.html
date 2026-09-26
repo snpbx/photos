@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#060606">
 <meta name="format-detection" content="telephone=no">
-<title>Your photos — Test - sep 27</title>
+<title>Test - sep 27 — album</title>
 <style>:root { color-scheme: light;
         --cream:#fef9e6; --ink:#000000; --carbon:#060606; --drift:#c7c3b4; --stone:#8d8b80;
         --amber:#fdc331; --ember:#fe5722; --red:#f0353c; --merlot:#b4213d; --plum:#671c3b;
@@ -125,71 +125,6 @@ footer .jp { display:block; margin-bottom:12px; font:400 12px/1 var(--jp); lette
 </head>
 <body>
 <nav class="bar pad"><span class="mark">PHOTOBOOTH</span><span class="jp" lang="ja">フォトブース</span></nav><header class="hero pad">
-  <div><p class="eyebrow" lang="ja">あなたの写真</p><h1>Your<br>photos</h1></div>
-  <p class="tag"><b>Test - sep 27</b>27 September 2026 · 12:40 AM</p>
-</header><section class="media pad pair"><figure class="card"><div class="top"><span class="label">Your print</span><a class="pill sm" href="https://res.cloudinary.com/wdhofaeh/image/upload/booth/dbd5mbw7h8/print.jpg">View →</a></div><img src="https://res.cloudinary.com/wdhofaeh/image/upload/booth/dbd5mbw7h8/print.jpg" alt="Your print"></figure><figure class="card"><div class="top"><span class="label">Your GIF</span><a class="pill sm" href="https://res.cloudinary.com/wdhofaeh/image/upload/booth/dbd5mbw7h8/session.gif">View →</a></div><img class="loop" src="https://res.cloudinary.com/wdhofaeh/image/upload/booth/dbd5mbw7h8/session.gif" alt="Your GIF"></figure></section><nav class="bands"><button class="band pad" onclick="downloadAll(this, ['https://res.cloudinary.com/wdhofaeh/image/upload/booth/dbd5mbw7h8/print.jpg','https://res.cloudinary.com/wdhofaeh/image/upload/booth/dbd5mbw7h8/session.gif'], 'photos-dbd5mbw7h8.zip')"><span class="name">Download all 2</span><span class="pill">Zip ↓</span></button><a class="band pad" href="https://res.cloudinary.com/wdhofaeh/image/upload/fl_attachment:print/booth/dbd5mbw7h8/print.jpg" download><span class="name">Save the print</span><span class="pill">Save ↓</span></a><a class="band pad" href="https://res.cloudinary.com/wdhofaeh/image/upload/fl_attachment:session/booth/dbd5mbw7h8/session.gif" download><span class="name">Save the GIF</span><span class="pill">Save ↓</span></a><a class="band pad" href="../../e/qamdwxmw4q/"><span class="name">The whole album</span><span class="pill">Open →</span></a></nav><div class="pad"><p class="note">On an iPhone, hold the print and choose “Save to Photos”, or use Save. Hold the GIF the same way to send it on.</p></div><script>
-const CRC = (() => { const t = new Uint32Array(256);
-  for (let i = 0; i < 256; i++) { let c = i;
-    for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
-    t[i] = c >>> 0; } return t; })();
-function crc32(b) { let c = 0xFFFFFFFF;
-  for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 0xFF] ^ (c >>> 8);
-  return (c ^ 0xFFFFFFFF) >>> 0; }
-function dosStamp(d) {
-  return [((d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() / 2)) & 0xFFFF,
-          (((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate()) & 0xFFFF];
-}
-async function downloadAll(btn, files, zipName) {
-  const out = btn.querySelector('.name') || btn;
-  const label = out.textContent;
-  btn.disabled = true;
-  const enc = new TextEncoder(), parts = [], central = [];
-  const [time, date] = dosStamp(new Date());
-  let offset = 0, done = 0;
-  try {
-    for (const path of files) {
-      out.textContent = 'Packing ' + (++done) + ' of ' + files.length + '…';
-      const data = new Uint8Array(await (await fetch(path)).arrayBuffer());
-      const name = enc.encode(path.split('/').pop());
-      const crc = crc32(data);
-      const lh = new DataView(new ArrayBuffer(30));
-      lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0, true);
-      lh.setUint16(8, 0, true); lh.setUint16(10, time, true); lh.setUint16(12, date, true);
-      lh.setUint32(14, crc, true); lh.setUint32(18, data.length, true);
-      lh.setUint32(22, data.length, true); lh.setUint16(26, name.length, true);
-      lh.setUint16(28, 0, true);
-      parts.push(new Uint8Array(lh.buffer), name, data);
-      const ch = new DataView(new ArrayBuffer(46));
-      ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true);
-      ch.setUint16(8, 0, true); ch.setUint16(10, 0, true); ch.setUint16(12, time, true);
-      ch.setUint16(14, date, true); ch.setUint32(16, crc, true);
-      ch.setUint32(20, data.length, true); ch.setUint32(24, data.length, true);
-      ch.setUint16(28, name.length, true); ch.setUint16(30, 0, true); ch.setUint16(32, 0, true);
-      ch.setUint16(34, 0, true); ch.setUint16(36, 0, true); ch.setUint32(38, 0, true);
-      ch.setUint32(42, offset, true);
-      central.push(new Uint8Array(ch.buffer), name);
-      offset += 30 + name.length + data.length;
-    }
-    let centralSize = 0;
-    for (const c of central) centralSize += c.length;
-    const end = new DataView(new ArrayBuffer(22));
-    end.setUint32(0, 0x06054b50, true); end.setUint16(4, 0, true); end.setUint16(6, 0, true);
-    end.setUint16(8, files.length, true); end.setUint16(10, files.length, true);
-    end.setUint32(12, centralSize, true); end.setUint32(16, offset, true);
-    end.setUint16(20, 0, true);
-    const blob = new Blob([...parts, ...central, new Uint8Array(end.buffer)],
-                          { type: 'application/zip' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = zipName;
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 30000);
-  } catch (e) {
-    out.textContent = 'Could not build the zip — save them one by one';
-    setTimeout(() => { out.textContent = label; btn.disabled = false; }, 4000);
-    return;
-  }
-  out.textContent = label;
-  btn.disabled = false;
-}
-</script><footer class="pad"><span class="jp" lang="ja">ありがとう</span><p>FOLLOW US FOR YOUR PHOTOS — <a href="https://instagram.com/mixel_ph">https://instagram.com/mixel_ph</a></p><p>Photographs stay up as long as this page does. Save the ones you want.</p></footer></body></html>
+  <div><p class="eyebrow" lang="ja">アルバム</p><h1>Test - sep 27</h1></div>
+  <p class="tag"><b>1 session</b>27 September 2026</p>
+</header><section class="pad"><div class="grid covers"><figure><a href="../../s/dbd5mbw7h8/"><img src="https://res.cloudinary.com/wdhofaeh/image/upload/booth/dbd5mbw7h8/print.jpg" alt="Session at 12:40 AM" loading="lazy"></a><figcaption><span class="label">12:40 AM</span><a class="pill sm" href="../../s/dbd5mbw7h8/">Open →</a></figcaption></figure></div></section><footer class="pad"><span class="jp" lang="ja">ありがとう</span><p>FOLLOW US FOR YOUR PHOTOS — <a href="https://instagram.com/mixel_ph">https://instagram.com/mixel_ph</a></p><p>Photographs stay up as long as this page does. Save the ones you want.</p></footer></body></html>
